@@ -413,7 +413,7 @@ As with the main touchstone of this system—Gumshoe—characters are presumed t
 
 ==== Failures
 
-When you (partially or fully) fail a roll, the GM presents consequences that you can react to in turn. The choice of which ability to use in your reaction depends on the situation. Most reaction rolls are _make or break_ rolls
+When you (partially or fully) fail a roll, the GM presents consequences that you can react to in turn. The choice of which ability to use in your reaction depends on the situation. It's common for reaction rolls to be _risk_ rolls (though not required).
 
 #rule-box(title: "Example")[Bob has a d8 in Aim and tries to hit NPC Alice. Alice is a bandit wanted in 20 towns, so she has a legendary DC of 11. Knowing this, Bob spends two Gunslinger Points to push his roll to a d12. Unfortunately, he rolls a 6 and a 10. Alice now gets to shoot back at him. Bob rolls Awareness to try to find cover to mitigate the damage. He rolls his d6 against a simple DC because they're in a saloon full of barrels: it's a 6, so he manages to moderate his damage. He emerges unscathed from the situation, but is now cornered by Alice. How will he proceed?
 
