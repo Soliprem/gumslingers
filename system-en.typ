@@ -30,8 +30,8 @@
 
   // Font settings
   set text(
-    font: "Times New Roman", // Fallback to common serif
-    size: 11pt,
+    font: ("Courier New", "Times New Roman"), // Fallback to common serif
+    size: 10pt,
     fill: rgb("#2d1810") // Dark brown text
   )
 
@@ -77,15 +77,25 @@
     #block(inset: (top: 0.6em, bottom: 0.2em))[#it.body]
   ]
 
+  show heading.where(level: 4): it => [
+    #set text(
+      size: 12pt, 
+      weight: "bold",
+      style: "italic",
+      fill: rgb("#8b4513")
+    )
+    #block(inset: (top: 0.6em, bottom: 0.2em))[#it.body]
+  ]
+
   // Style for emphasized text (rules, important info)
   show emph: it => [
-    #set text(style: "italic", fill: rgb("#8b4513"))
+    #set text(fill: rgb("#8b4513"))
     #it
   ]
 
   // Strong text styling
   show strong: it => [
-    #set text(weight: "bold", fill: rgb("#5d2a0a"))
+    #set text(fill: rgb("#5d2a0a"))
     #it
   ]
 
@@ -212,7 +222,7 @@
       #ability-row("Survival", abilities.survival)
       #ability-row("Grit", abilities.grit)
       #ability-row("Awareness", abilities.awareness)
-      #ability-row("Fast Talk", abilities.fast-talk)
+      #ability-row("Gift of the Gab", abilities.fast-talk)
     ],
     
     // Right column - Health and notes
@@ -343,7 +353,7 @@ The system uses a roll-over mechanic based on Abilities. Each character has 6 ab
 #rule-box(title: [Assigning Abilities])[
   Ability scores are tracked by increasing die size. The starting point for all abilities is d6.
 
-  Based on character choices, base ability scores can change. For example, an excellent marksman might start with a d8 or d10 in Aim instead of the usual d6. Conversely, a simple farmhand might start with a d4 in Fast Talk.
+  Based on character creation choices, base ability scores can change. For example, an excellent marksman might start with a d8 or d10 in Aim instead of the usual d6. Conversely, a simple farmhand might start with a d4 in Gift of the Gab.
   
   _$ "d4" <- "d6" -> "d8" -> "d10" -> "d12" $_
 ]
@@ -356,9 +366,19 @@ The system uses a roll-over mechanic based on Abilities. Each character has 6 ab
   Beyond d12, each Gunslinger Point becomes a +1. Starting from a d12 (even if pushed), 4 points can be spent to roll a d20 with no modifiers. Beyond those 4 points, you add a +1 modifier to the d20 for each additional Gunslinger Point spent.
 ]
 
-You can double the effect of a push (with GM consent) by introducing a complication.
+You can double the effect of a push (with GM consent) by introducing a complication. Instead of a complication, the World can tally a due.
+
+The World (personified in the GM) can keep a tally of the PC's dues. A sort of symbol of the unfair luck they might have had, or of the favours fate handed them. Fate, however, doesn't do gifts, and luck turns around.
+
+#rule-box(title: "Dues")[
+  Dues—accumulated within Bargains with Fate—are tokens the GM gets to spend to insert world or NPC moves while outside of the timing defined by the normal resolution system.
+
+  #quote()[_Run, cowboy, try your best. I'll be on the other side. This check has your  signature on it, and I fully intend to cash it._]
+]
 
 Generally, Difficulty Classes are:
+
+- *Easy:* 3+
 - *Simple:* 5+
 - *Moderate:* 7+ 
 - *Hard:* 9+
@@ -386,7 +406,7 @@ It's reasonable for the GM to impose disadvantage on reaction rolls using the sa
 
 In a reaction, you can perform quick actions that grant advantage if they present a complication.
 
-#rule-box(title: "Example 2")[Alice is fleeing from the police when she sees a man recognize her from across the street. She approaches him to convince him not to call _the law_, but her Fast Talk isn't working (she rolled a 3). The man now runs toward the sheriff. Alice reacts using her Fast Talk again, but rolling with disadvantage. Alice could cancel her disadvantage by drawing her gun and pointing it at the man to frighten him. Naturally, she's in town and there are people around. The game might not be worth the candle.]
+#rule-box(title: "Example 2")[Alice is fleeing from the police when she sees a man recognize her from across the street. She approaches him to convince him not to call _the law_, but her Gift of the Gab isn't working (she rolled a 3). The man now runs toward the sheriff. Alice reacts using her Gift of the Gab again, but rolling with disadvantage. Alice could cancel her disadvantage by drawing her gun and pointing it at the man to frighten him. Naturally, she's in town and there's people around. It might just not be worth it.]
 
 === Damage
 
@@ -407,7 +427,7 @@ The six abilities are:
 - Survival
 - Grit (ability to "grit your teeth." Determines resistance to pain, for example)
 - Awareness (ability to observe surroundings, actively or passively. Tracking skills)
-- Fast Talk
+- Gift of the Gab
 
 == Character Creation
 
@@ -432,7 +452,7 @@ Gunslinger Points fully recharge after long rests (e.g., a full night). They can
 
 These are essentially classes that are nothing more than legal combinations of what's written above.
 
-- *Gunslinger*
+- *Marksman*: shooty thingies
 - *Ranger*: Horses, plains
 - *Smuggler*: "Officer, I swear I don't know how that got in my bag"
 - *Survivor*: After navigating a difficult life, chooses to rely more on experience than on people or fate.
@@ -450,7 +470,7 @@ The sheets for these can be found at the end of the document
     awareness: "d6",
     fast-talk: "d6"
 ),
-  archetype: "Gunslinger",
+  archetype: "Marksman",
   gunslinger-points: 6,
 )
 
