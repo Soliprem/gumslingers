@@ -31,6 +31,7 @@
   // Font settings
   set text(
     font: ("Courier New", "Times New Roman"), // Fallback to common serif
+    weight: "semibold",
     size: 10pt,
     fill: rgb("#2d1810") // Dark brown text
   )
@@ -55,7 +56,7 @@
 
   show heading.where(level: 2): it => [
     #set text(
-      size: 16pt, 
+      size: 18pt, 
       weight: "bold",
       font: ("Courier New", "Georgia", "Times New Roman"),
       fill: rgb("#5d2a0a")
@@ -69,7 +70,7 @@
 
   show heading.where(level: 3): it => [
     #set text(
-      size: 14pt, 
+      size: 16pt, 
       weight: "bold",
       style: "italic",
       fill: rgb("#8b4513")
@@ -79,7 +80,7 @@
 
   show heading.where(level: 4): it => [
     #set text(
-      size: 12pt, 
+      size: 14pt, 
       weight: "bold",
       style: "italic",
       fill: rgb("#8b4513")
@@ -411,7 +412,7 @@ Favorable circumstances may grant *advantages* or *disadvantages*.
 
 As with the main touchstone of this system—Gumshoe—characters are presumed to be _competent._ No rolls are needed for activities that any denizen of the Old West would be able to do. Additionally, as ability levels increase, this minimum baseline for success also rises.
 
-==== Failures
+==== Failures and Reactions
 
 When you (partially or fully) fail a roll, the GM presents consequences that you can react to in turn. The choice of which ability to use in your reaction depends on the situation. It's common for reaction rolls to be _risk_ rolls (though not required).
 
@@ -424,6 +425,8 @@ It's reasonable for the GM to impose disadvantage on reaction rolls using the sa
 In a reaction, you can perform quick actions that grant advantage if they present a complication.
 
 #rule-box(title: "Example 2")[Alice is fleeing from the police when she sees a man recognize her from across the street. She approaches him to convince him not to call _the law_, but her Gift of the Gab isn't working (she rolled a 3). The man now runs toward the sheriff. Alice reacts using her Gift of the Gab again, but rolling with disadvantage. Alice could cancel her disadvantage by drawing her gun and pointing it at the man to frighten him. Naturally, she's in town and there's people around. It might just not be worth it.]
+
+After the first exchange occurs, the player might be tempted to keep the chain of events going: as their reaction triggers a reaction from the NPC, and so forth. Other players _can_ and probably should intervene (unless it's fun for them to watch as their friend keeps digging their own grave with more and more complications. In that case, have fun!).
 
 === Damage
 
