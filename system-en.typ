@@ -354,7 +354,7 @@ The system uses a 2-die roll-over mechanic based on Abilities. Each character ha
 
 The base roll is simple:
 - Roll two dice of the indicated size
-- Compare them with the CD:
+- Compare them with the DC:
   - If both succeed, it's a full success: you get what you want and nothing bad happens
   - If both fail, it's a full failure: get ready for consequences (most commonly in combat, the enemy gets to do something)
   - If one succeeds, it's a mixed success: you get what you want, but you suffer some consequence (meaning that both the success and failure effects take place)
