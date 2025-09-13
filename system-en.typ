@@ -348,10 +348,27 @@
 
 === Resolution System
 
-The system uses a roll-over mechanic based on Abilities. Each character has 6 abilities (see below).
+The system uses a 2-die roll-over mechanic based on Abilities. Each character has 6 abilities (see below).
+
+==== Main roll
+
+The base roll is simple:
+- Roll two dice of the indicated size
+- Compare them with the CD:
+  - If both succeed, it's a full success: you get what you want and nothing bad happens
+  - If both fail, it's a full failure: get ready for consequences (most commonly in combat, the enemy gets to do something)
+  - If one succeeds, it's a mixed success: you get what you want, but you suffer some consequence (meaning that both the success and failure effects take place)
+- If the two dice have _the same value_, then it's a _strong_ result: whichever effect occurs, it's going to be amplified
+
+==== Risk roll
+
+Sometimes a PC might want to not care about contingencies and go straight for the metaphorical kill, even at their own risk. This is the _risk roll._ Roll 1 die (subject to advantage), and treat it as if it were a pair of dice for the purposes of the main roll's degrees of success: any result is automatically a _strong_ result, and there's no mixed success.
+
+==== Ability dice
+
+Ability scores are tracked by increasing die size. The starting point for all abilities is d6.
 
 #rule-box(title: [Assigning Abilities])[
-  Ability scores are tracked by increasing die size. The starting point for all abilities is d6.
 
   Based on character creation choices, base ability scores can change. For example, an excellent marksman might start with a d8 or d10 in Aim instead of the usual d6. Conversely, a simple farmhand might start with a d4 in Gift of the Gab.
   
@@ -387,18 +404,18 @@ Generally, Difficulty Classes are:
 Favorable circumstances may grant *advantages* or *disadvantages*.
 
 #rule-box(title: [Advantages and Disadvantages])[
-  Advantage: Add a die of identical size to the one being rolled—after any pushes. Take the higher result. _An advantage can be converted to +1 up to d8, +2 up to d12, and +4 for d20_
+  Advantage: Add a die of identical size to the one being rolled—after any pushes. Take the two highest results. _An advantage can be converted to +1 up to d8, +2 up to d12, and +4 for d20_
 
-  Disadvantage: Add a die of identical size to the one being rolled—after any pushes. Take the lower result.
+  Disadvantage: Add a die of identical size to the one being rolled—after any pushes. Take the two lowest results.
 ]
 
-As with the main touchstone of this system—Gumshoe—characters are presumed to be _competent_. No rolls are needed for activities that any denizen of the Old West would be able to do. Additionally, as ability levels increase, this minimum baseline for success also rises.
+As with the main touchstone of this system—Gumshoe—characters are presumed to be _competent._ No rolls are needed for activities that any denizen of the Old West would be able to do. Additionally, as ability levels increase, this minimum baseline for success also rises.
 
 ==== Failures
 
-When you fail a roll, the GM presents consequences that you can react to in turn. The choice of which ability to use in your reaction depends on the situation.
+When you (partially or fully) fail a roll, the GM presents consequences that you can react to in turn. The choice of which ability to use in your reaction depends on the situation. Most reaction rolls are _make or break_ rolls
 
-#rule-box(title: "Example")[Bob has a d8 in Aim and tries to hit NPC Alice. Alice is a bandit wanted in 20 towns, so she has a legendary DC of 11. Knowing this, Bob spends two Gunslinger Points to push his roll to a d12. Unfortunately, he rolls a 6. Alice now gets to shoot back at him. Bob rolls Awareness to try to find cover to mitigate the damage. He rolls his d6 against a simple DC because they're in a saloon full of barrels: it's a 6, so he manages to moderate his damage. He emerges unscathed from the situation, but is now cornered by Alice. How will he proceed?
+#rule-box(title: "Example")[Bob has a d8 in Aim and tries to hit NPC Alice. Alice is a bandit wanted in 20 towns, so she has a legendary DC of 11. Knowing this, Bob spends two Gunslinger Points to push his roll to a d12. Unfortunately, he rolls a 6 and a 10. Alice now gets to shoot back at him. Bob rolls Awareness to try to find cover to mitigate the damage. He rolls his d6 against a simple DC because they're in a saloon full of barrels: it's a 6, so he manages to moderate his damage. He emerges unscathed from the situation, but is now cornered by Alice. How will he proceed?
 
 Bob could instead choose to react with Grit. He heroically takes the bullet in the shoulder, rolling his d10 in Grit against a legendary DC of 11. He uses a Gunslinger Point and manages to succeed by rolling an 11. Eventually he'll have to stop (he does have lead in his shoulder), but for now he doesn't give ground.]
 
