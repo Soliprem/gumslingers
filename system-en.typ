@@ -155,6 +155,42 @@
   body
 }
 
+#let western-toc(title: "Table of Contents") = {
+  
+  // Title styling
+  block(
+    width: 100%,
+    inset: (y: 0.8em),
+    stroke: (bottom: 3pt + rgb("#8b4513"), top: 3pt + rgb("#8b4513")),
+    fill: rgb("#8b4513").transparentize(80%),
+  )[
+    #set text(
+      size: 20pt,
+      weight: "bold", 
+      fill: rgb("#5d2a0a"),
+      font: ("Courier Prime", "Georgia", "Times New Roman")
+    )
+    #align(center)[#title]
+  ]
+  
+  v(0.8em)
+  
+  // TOC container with Western styling
+  block(
+    width: 100%,
+    inset: 20pt,
+    radius: 6pt,
+    fill: rgb("#f0e6d2").transparentize(30%),
+    stroke: 2pt + rgb("#8b4513").transparentize(30%),
+  )[
+    #outline(
+      depth: 3,
+      indent: auto,
+    )
+  ]
+  pagebreak()
+}
+
 #let rule-box(title: none, body) = {
   let title-text = if title != none { 
     heading(level: 3)[#title] 
@@ -387,8 +423,8 @@
 
 // Usage example - replace this with your actual content
 #show: western-theme.with(title: "Gumslingers")
-
 = Gumslingers
+#western-toc()
 
 
 == Resolution System
@@ -499,58 +535,56 @@ The six abilities are:
 - Awareness (ability to observe surroundings, actively or passively. Tracking skills)
 - Gift of the Gab
 
-=== Ability Perks
-Each ability, when "leveled" up, offers the choice of a passive or an active perks. Active abilities are stronger, but activate upon using Gunslinger Points. Passive abilities are weaker, but don't require resources to activate. 
+When abilities get stronger, so does the kind of thing the character can do become more and more impressive. Here below there's a list to serve as inspiration, to understand the power scaling of characters.
+
+
+=== What can they do? 
 
 #table(
-  columns: (auto, auto, auto, 2fr),
-  [*Ability*], [*Level*], [*Type*], [*Effect*],
+  columns: (auto, auto, 2fr),
+  [*Ability*], [*Level*], [*What can you do?*],
   
-  table.cell(rowspan: 6)[*Aim*],
-  [d8], [Active], [*Cover Sniper:* When pushing rolls you ignore cover],
-  [], [Passive], [*Quick Draw:* Act first in combat],
-  [d10], [Active], [*Called Shot:* When pushing rolls, you can call shots],
-  [], [Passive], [*Steady Hand:* No penalty for long shots],
-  [d12], [Active], [*Dead Eye* When pushing rolls, you treat a partial or full success as a strong success.],
-  [], [Passive], [*One Shot:* When bringing an enemy down in one shot, gain one Gunslinger Point],
-
-  table.cell(rowspan: 6)[*Ride*],
-  [d8], [Active], [],
-  [], [Passive], [],
-  [d10], [Active], [],
-  [], [Passive], [],
-  [d12], [Active], [],
-  [], [Passive], [],
-
-  table.cell(rowspan: 6)[*Survival*],
-  [d8], [Active], [],
-  [], [Passive], [],
-  [d10], [Active], [],
-  [], [Passive], [],
-  [d12], [Active], [],
-  [], [Passive], [],
-  table.cell(rowspan: 6)[*Grit*],
-  [d8], [Active], [],
-  [], [Passive], [],
-  [d10], [Active], [],
-  [], [Passive], [],
-  [d12], [Active], [],
-  [], [Passive], [],
-  table.cell(rowspan: 6)[*Awareness*],
-  [d8], [Active], [],
-  [], [Passive], [],
-  [d10], [Active], [],
-  [], [Passive], [],
-  [d12], [Active], [],
-  [], [Passive], [],
+  table.cell(rowspan: 5)[*Aim*],
+  [d4], [You couldn't hit the broad side of a barn if you were standing inside it. Best stick to threatening folks from real close.],
+  [d6], [You can hit what you're aiming at, most of the time. Nothing fancy, but you won't embarrass yourself in a scrap.],
+  [d8], [You would do the William Tell on your own spouse, you're fast on the draw.],
+  [d10], [You can call your shots even under pressure, you could cut off the tallest leaf of a tree with a single shot bullet, or hunt birds with a revolver on horseback.], 
+  [d12], [Duelling is no challenge to you. You could end the life of any man you see, should you wish it, and be confident that not one of the lawmen they'd send after you could ever be a match for your skill. Your equals don't run with Uncle Sam.], 
   
-  table.cell(rowspan: 6)[*Gift of the Gab*],
-  [d8], [Active], [],
-  [], [Passive], [],
-  [d10], [Active], [],
-  [], [Passive], [],
-  [d12], [Active], [],
-  [], [Passive], [],
+  table.cell(rowspan: 5)[*Ride*],
+  [d4],[Horses seem to know you're nervous, and they don't much like it. You can stay in the saddle, but barely.],
+  [d6],[You're comfortable on horseback and can handle most any gentle mount without trouble],
+  [d8], [You can steal any horse from their owner by gaining its love and trust, and ride for hours without getting tired.],
+  [d10], [You can jump any reasonable obstacle, brave any river and tame any wild horse you may find.],
+  [d12], [The absence  of roads won't slow you down, nor will the brush, nor the fact that you lack a familiar animal. Is that an elephant? A mountain goat? A buffalo? Anything can be tamed.],
+  
+  table.cell(rowspan: 5)[*Survival*],
+  [d4],[The wilderness is a cruel mistress who doesn't much care for your company. You're not confident in camping out alone],
+  [d6],[You're confident you can give yourself a fighting chance in a more challenging environment. In good conditions, you might even like staying out.],
+  [d8], [You can easily set up camp, survive alone in the wilderness for an indefinite amount of time, light a fire.],
+  [d10], [Your fires don't emit visible smoke. You can camp without being seen, and you see all who try to do the same.],
+  [d12], [You can get the lay of the land better than anyone could dream of in a lifetime, and you can do so in a matter of hours. You can follow any track, cut away from any trail without getting lost.],
+  
+  table.cell(rowspan: 5)[*Grit*],
+  [d4],[You wilt under pressure like a flower in the desert sun. Pain, hardship, and harsh words all hit you harder than they should.],
+  [d6],[You can take a punch and keep standing. Life's knocked you around some, but you've learned to roll with it.],
+  [d8], [Starvation, torture, thirst. Words that'd make another cowpoke shiver that make you smile. Bring it on.],
+  [d10], [Pain is just a voice in your head, and it can be tuned out. That bullet lodged within your shoulder isn't going anywhere, but you've sure got places to be.],
+  [d12], [Death keeps knocking on your door, and you keep telling it to come later. You don't know what makes your bones and flows in your veins, but you know it's tough.],
+  
+  table.cell(rowspan: 5)[*Awareness*],
+  [d4],[You couldn't spot trouble if it was wearing a bright red shirt and firing a cannon. Best keep your friends close - you'll need them to watch your back.],
+  [d6],[You notice the important things - who's armed, where the exits are, when someone's obviously lying. Nothing fancy, but enough to keep you breathing.],
+  [d8], [You notice the slightest bulge coming from a concealed weapon, you keep tabs on any cover around you should a gunfight arise.],
+  [d10], [As you observe a person, you can tell by the look on their face how much sleep they got, if they drink. You can find small clues, even when carefully hidden.],
+  [d12], [Nothing eludes your notice. Not a small change in wind that makes you easier to track, not the faint sound of padded hooves preparing an ambush. You're always ready.],
+  
+  table.cell(rowspan: 5)[*Gift of the Gab*],
+  [d4],[Words fail you when you need them most. You stammer, you stumble, and you generally make folks wish you'd just stay quiet.],
+  [d6],[You can hold a conversation without embarrassing yourself. People listen when you talk, even if they don't always like what they hear.],
+  [d8], [Words, sophistry and a sly silver tongue are in your arsenal. You could sell a pharmacist into paying you to "sample" his products.],
+  [d10], [The gab goes beyond the voice. It's in the tone, the manners, the gestures. You know this second layer of language and its many dialects, which change through social classes and geography.],
+  [d12], [Your reputation precedes you, and it opens many, many doors. Your words carry weight, and even your enemies think themselves wise to listen to you: one such as you -they'd think- probably doesn't deal in empty threats.],
 )
 
 == Character Creation
