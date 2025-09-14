@@ -4,7 +4,7 @@
   
   // Page setup with margins
   set page(
-    paper: "us-letter",
+    paper: "a4",
     margin: (x: 1.2in, y: 1in),
     background: {
       // Subtle parchment-like background with aging effect
@@ -30,10 +30,9 @@
 
   // Font settings
   set text(
-    font: ("Courier New", "Times New Roman"), // Fallback to common serif
-    weight: "semibold",
-    size: 10pt,
-    fill: rgb("#2d1810") // Dark brown text
+    font: ("Courier Prime", "Times New Roman"), // Fallback to common serif
+    size: 12pt,
+    fill: rgb("#2d1810"), // Dark brown text
   )
 
   // Heading styles with western feel
@@ -41,7 +40,7 @@
     #set text(
       size: 24pt, 
       weight: "bold",
-      font: ("Courier New", "Georgia", "Times New Roman"),
+      font: ("Courier Prime", "Georgia", "Times New Roman"),
       fill: rgb("#5d2a0a")
     )
     #set align(center)
@@ -58,7 +57,7 @@
     #set text(
       size: 18pt, 
       weight: "bold",
-      font: ("Courier New", "Georgia", "Times New Roman"),
+      font: ("Courier Prime", "Georgia", "Times New Roman"),
       fill: rgb("#5d2a0a")
     )
     #block(
@@ -85,7 +84,7 @@
       style: "italic",
       fill: rgb("#8b4513")
     )
-    #block(inset: (top: 0.6em, bottom: 0.2em))[#it.body]
+    #block(inset: (top: 0.4em, bottom: 0.15em))[#it.body]
   ]
 
   // Style for emphasized text (rules, important info)
@@ -106,11 +105,56 @@
     #set text(fill: rgb("#2d1810"))
     #it
   ]
+
+  set table(
+    stroke: none,
+    fill: (x, y) => {
+      if y == 0 { 
+        rgb("#8b4513").transparentize(70%)
+      } else if calc.odd(y) { 
+        rgb("#f0e6d2").transparentize(60%)
+      } else { 
+        rgb("#ffffff").transparentize(30%) 
+      }
+    },
+    inset: 8pt
+  )
+
+  show table: it => [
+    #block(
+      width: 100%,
+      inset: 0pt,
+      radius: 4pt,
+      stroke: 2pt + rgb("#8b4513").transparentize(30%),
+      clip: true,
+    )[
+      #it
+    ]
+  ]
+
+  show table.cell: it => {
+    if it.y == 0 {
+      // Header cells
+      set text(
+        weight: "bold",
+        fill: rgb("#2d1810"),
+        size: 11pt
+      )
+      it
+    } else {
+      // Regular cells
+      set text(
+        fill: rgb("#2d1810"),
+        size: 10pt
+      )
+      it
+    }
+  }
+
   
   body
 }
 
-// Custom box for rules or callouts - defined outside the theme function
 #let rule-box(title: none, body) = {
   let title-text = if title != none { 
     heading(level: 3)[#title] 
@@ -340,18 +384,18 @@
   gunslinger-points: "  "
 )
 
+
 // Usage example - replace this with your actual content
 #show: western-theme.with(title: "Gumslingers")
 
 = Gumslingers
 
-== System
 
-=== Resolution System
+== Resolution System
 
 The system uses a 2-die roll-over mechanic based on Abilities. Each character has 6 abilities (see below).
 
-==== Main roll
+=== Main roll
 
 The base roll is simple:
 - Roll two dice of the indicated size
@@ -361,11 +405,11 @@ The base roll is simple:
   - If one succeeds, it's a mixed success: you get what you want, but you suffer some consequence (meaning that both the success and failure effects take place)
 - If the two dice have _the same value_, then it's a _strong_ result: whichever effect occurs, it's going to be amplified
 
-==== Risk roll
+=== Risk roll
 
 Sometimes a PC might want to not care about contingencies and go straight for the metaphorical kill, even at their own risk. This is the _risk roll._ Roll 1 die (subject to advantage), and treat it as if it were a pair of dice for the purposes of the main roll's degrees of success: any result is automatically a _strong_ result, and there's no mixed success.
 
-==== Ability dice
+=== Ability dice
 
 Ability scores are tracked by increasing die size. The starting point for all abilities is d6.
 
@@ -389,20 +433,26 @@ You can double the effect of a push (with GM consent) by introducing a complicat
 The World (personified in the GM) can keep a tally of the PC's dues. A sort of symbol of the unfair luck they might have had, or of the favours fate handed them. Fate, however, doesn't do gifts, and luck turns around.
 
 #rule-box(title: "Dues")[
-  Dues—accumulated within Bargains with Fate—are tokens the GM gets to spend to insert world or NPC moves while outside of the timing defined by the normal resolution system.
+  Dues—accumulated within Bargains with Fate—are tokens the GM gets to spend to insert world or NPC moves while outside of the timing defined by the normal resolution system. For example, the GM might spend a token to:
+  - add a complication to a scene
+  - have an NPC interrupt a player turn / sequence of player turns
 
   #quote()[_Run, cowboy, try your best. I'll be on the other side. This check has your  signature on it, and I fully intend to cash it._]
 ]
 
 Generally, Difficulty Classes are:
 
-- *Easy:* 3+
-- *Simple:* 5+
-- *Moderate:* 7+ 
-- *Hard:* 9+
-- *Legendary:* 11+
+#table(
+  columns: (1fr, auto, 2fr),
+  [*Difficulty*], [*DC*], [*When to Use*],
+  [Easy], [3+], [Simple tasks],
+  [Simple], [5+], [Routine *challenges* for competent folk],
+  [Moderate], [7+], [Significant obstacles],
+  [Hard], [9+], [Expert-level tasks],
+  [Legendary], [11+], [Heroic feats],
+)
 
-Favorable circumstances may grant *advantages* or *disadvantages*.
+Favorable circumstances may grant *advantages* or *disadvantages.*
 
 #rule-box(title: [Advantages and Disadvantages])[
   Advantage: Add a die of identical size to the one being rolled—after any pushes. Take the two highest results. _An advantage can be converted to +1 up to d8, +2 up to d12, and +4 for d20_
@@ -412,19 +462,19 @@ Favorable circumstances may grant *advantages* or *disadvantages*.
 
 As with the main touchstone of this system—Gumshoe—characters are presumed to be _competent._ No rolls are needed for activities that any denizen of the Old West would be able to do. Additionally, as ability levels increase, this minimum baseline for success also rises.
 
-==== Failures and Reactions
+=== Failures and Reactions
 
 When you (partially or fully) fail a roll, the GM presents consequences that you can react to in turn. The choice of which ability to use in your reaction depends on the situation. It's common for reaction rolls to be _risk_ rolls (though not required).
 
-#rule-box(title: "Example")[Bob has a d8 in Aim and tries to hit NPC Alice. Alice is a bandit wanted in 20 towns, so she has a legendary DC of 11. Knowing this, Bob spends two Gunslinger Points to push his roll to a d12. Unfortunately, he rolls a 6 and a 10. Alice now gets to shoot back at him. Bob rolls Awareness to try to find cover to mitigate the damage. He rolls his d6 against a simple DC because they're in a saloon full of barrels: it's a 6, so he manages to moderate his damage. He emerges unscathed from the situation, but is now cornered by Alice. How will he proceed?
+#rule-box(title: "Example")[Bob has a d8 in Aim and tries to hit NPC Alice. Alice is a bandit wanted in 20 towns, so she has a legendary DC of 11. Knowing this, Bob spends two Gunslinger Points to push his roll to a d12. Unfortunately, he rolls a 6 and a 10, thus taking a full failure. Alice now gets to shoot back at him. Bob rolls Awareness to try to find cover to mitigate the damage. He acts quickly, having no real alternatives, calling for a _risk roll._ He rolls his d6 against a simple DC of 5 because they're in a saloon full of barrels: it's a 6, so he manages to dive, taking no damage. He emerges unscathed from the situation, but is now cornered by Alice. How will he proceed?
 
-Bob could instead choose to react with Grit. He heroically takes the bullet in the shoulder, rolling his d10 in Grit against a legendary DC of 11. He uses a Gunslinger Point and manages to succeed by rolling an 11. Eventually he'll have to stop (he does have lead in his shoulder), but for now he doesn't give ground.]
+Bob could instead choose to react with Grit. He heroically takes the bullet in the shoulder, _risk_ rolling his d10 in Grit against a legendary DC of 11. He uses a Gunslinger Point and manages to succeed by rolling an 11. Eventually he'll have to stop (he does have lead in his shoulder), but for now he doesn't give ground.]
 
 It's reasonable for the GM to impose disadvantage on reaction rolls using the same ability that just failed (barring special circumstances).
 
 In a reaction, you can perform quick actions that grant advantage if they present a complication.
 
-#rule-box(title: "Example 2")[Alice is fleeing from the police when she sees a man recognize her from across the street. She approaches him to convince him not to call _the law_, but her Gift of the Gab isn't working (she rolled a 3). The man now runs toward the sheriff. Alice reacts using her Gift of the Gab again, but rolling with disadvantage. Alice could cancel her disadvantage by drawing her gun and pointing it at the man to frighten him. Naturally, she's in town and there's people around. It might just not be worth it.]
+#rule-box(title: "Example 2")[Alice is fleeing from the police when she sees a man recognize her from across the street. She approaches him to convince him not to call _the law_, but her Gift of the Gab isn't working (she rolled a 3 and a 2). The man now runs toward the sheriff. Alice reacts using her Gift of the Gab again, but the GM rules that she's rolling with disadvantage. Alice could cancel her disadvantage by drawing her gun and pointing it at the man to frighten him. Naturally, she's in town and there's people around. It might just not be worth it.]
 
 After the first exchange occurs, the player might be tempted to keep the chain of events going: as their reaction triggers a reaction from the NPC, and so forth. Other players _can_ and probably should intervene (unless it's fun for them to watch as their friend keeps digging their own grave with more and more complications. In that case, have fun!).
 
@@ -449,20 +499,79 @@ The six abilities are:
 - Awareness (ability to observe surroundings, actively or passively. Tracking skills)
 - Gift of the Gab
 
+=== Ability Perks
+Each ability, when "leveled" up, offers the choice of a passive or an active perks. Active abilities are stronger, but activate upon using Gunslinger Points. Passive abilities are weaker, but don't require resources to activate. 
+
+#table(
+  columns: (auto, auto, auto, 2fr),
+  [*Ability*], [*Level*], [*Type*], [*Effect*],
+  
+  table.cell(rowspan: 6)[*Aim*],
+  [d8], [Active], [*Cover Sniper:* When pushing rolls you ignore cover],
+  [], [Passive], [*Quick Draw:* Act first in combat],
+  [d10], [Active], [*Called Shot:* When pushing rolls, you can call shots],
+  [], [Passive], [*Steady Hand:* No penalty for long shots],
+  [d12], [Active], [*Dead Eye* When pushing rolls, you treat a partial or full success as a strong success.],
+  [], [Passive], [*One Shot:* When bringing an enemy down in one shot, gain one Gunslinger Point],
+
+  table.cell(rowspan: 6)[*Ride*],
+  [d8], [Active], [],
+  [], [Passive], [],
+  [d10], [Active], [],
+  [], [Passive], [],
+  [d12], [Active], [],
+  [], [Passive], [],
+
+  table.cell(rowspan: 6)[*Survival*],
+  [d8], [Active], [],
+  [], [Passive], [],
+  [d10], [Active], [],
+  [], [Passive], [],
+  [d12], [Active], [],
+  [], [Passive], [],
+  table.cell(rowspan: 6)[*Grit*],
+  [d8], [Active], [],
+  [], [Passive], [],
+  [d10], [Active], [],
+  [], [Passive], [],
+  [d12], [Active], [],
+  [], [Passive], [],
+  table.cell(rowspan: 6)[*Awareness*],
+  [d8], [Active], [],
+  [], [Passive], [],
+  [d10], [Active], [],
+  [], [Passive], [],
+  [d12], [Active], [],
+  [], [Passive], [],
+  
+  table.cell(rowspan: 6)[*Gift of the Gab*],
+  [d8], [Active], [],
+  [], [Passive], [],
+  [d10], [Active], [],
+  [], [Passive], [],
+  [d12], [Active], [],
+  [], [Passive], [],
+)
+
 == Character Creation
 
 *You have 8 Gunslinger Points at your disposal.* They can be kept entirely (meaning you'll have 8 Gunslinger Points available after each rest), or they can be invested in permanent improvements. Points can only be invested during character creation, or through strong narrative justification (since Gunslinger Points become a rechargeable resource once you start playing).
 
 #rule-box(title: [Investing Gunslinger Points])[
   The cost to permanently increase an ability is:
-  - 1 point $"d6" -> "d8"$
-  - 2 points $"d8" -> "d10"$
-  - 3 points $"d10" -> "d12"$
+#table(
+  columns: (auto, auto, 1fr),
+  [*Die Step*], [*Cost*], [*Descriptors*],
+  [d6 $->$ d4], [-1 point\*], [Not great],
+  [d6 $->$ d8], [1 point], [Pretty great],
+  [d8 $->$ d10], [2 points], [Incredible],
+  [d10 $->$ d12], [3 points], [Peak human ability],
+)
 
-*You can lower an ability to d4 to gain one Gunslinger Point.*
+\*You can lower an ability to d4 to gain one Gunslinger Point.
 ]
 
-#rule-box(title: [Remaining Points])[The remaining points form the character's *Gunslinger Point limit*. There are various ways to recharge Gunslinger Points, but they can never exceed the limit (unless explicitly stated by an effect).]
+#rule-box(title: [Remaining Points])[The remaining points form the character's *Gunslinger Point limit.* There are various ways to recharge Gunslinger Points, but they can never exceed the limit (unless explicitly stated by an effect).]
 
 === Recovering Gunslinger Points
 
@@ -472,7 +581,7 @@ Gunslinger Points fully recharge after long rests (e.g., a full night). They can
 
 These are essentially classes that are nothing more than legal combinations of what's written above.
 
-- *Marksman*: shooty thingies
+- *Marksman*: Deadeye, a cigarette and a well-kept weapon
 - *Ranger*: Horses, plains
 - *Smuggler*: "Officer, I swear I don't know how that got in my bag"
 - *Survivor*: After navigating a difficult life, chooses to rely more on experience than on people or fate.
@@ -532,3 +641,4 @@ The sheets for these can be found at the end of the document
   archetype: "Survivor",
   gunslinger-points: 2,
 )
+
