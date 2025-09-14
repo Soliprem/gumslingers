@@ -535,10 +535,12 @@ The six abilities are:
 - Awareness (ability to observe surroundings, actively or passively. Tracking skills)
 - Gift of the Gab
 
-When abilities get stronger, so does the kind of thing the character can do become more and more impressive. Here below there's a list to serve as inspiration, to understand the power scaling of characters.
-
 
 === What can they do? 
+
+When abilities get stronger, so does the kind of thing the character can do become more and more impressive. Here below there's a list to serve as inspiration, to understand the power scaling of characters. GMs can use this list to determine what tasks requite no roll or when to award advantage / disadvantage or how to set DCs. Depending on how much rolling is desidered, one might consider as "guaranteed" either the _current_ level of the ability, or the one below. (ie, At d8, one can either consider all d8 and lower "abilities" to be automatic, or to consider "automatic" all d6 and lower).
+
+At the same time, pushing rolls also increases in value. Beyond simply increasing die size, it can also be played with to achieve feats normally reserved off of higher "tiers", or to push the boundaries of one's competence in a creative manner. EG, a PC with d8 Aim might push their roll to also call their shot.
 
 #table(
   columns: (auto, auto, 2fr),
