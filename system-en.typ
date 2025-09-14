@@ -210,6 +210,10 @@
   ]
 }
 
+#let example-box(body) = {
+  rule-box(title: "Example")[#body]
+}
+
 #let character-sheet(
   name: "",
   archetype: "",
@@ -265,11 +269,11 @@
       
       #v(0.3em)
       
-      // Gunslinger points
+      // Sand points
       #grid(
         columns: (auto, 1fr),
-        [*Gunslinger Points:*], 
-        [#gunslinger-points / #gunslinger-points]
+        [*Sand Points:*], 
+        [ #gunslinger-points / #gunslinger-points]
       )
       
       #v(0.5em)
@@ -431,6 +435,8 @@
 
 The system uses a 2-die roll-over mechanic based on Abilities. Each character has 6 abilities (see below).
 
+Characters also have Sand Points (named after the "having sand" expression), which allows them to push themselves beyond their normal limits.
+
 === Main roll
 
 The base roll is simple:
@@ -456,12 +462,12 @@ Ability scores are tracked by increasing die size. The starting point for all ab
   _$ "d4" <- "d6" -> "d8" -> "d10" -> "d12" $_
 ]
 
-#rule-box(title: [Gunslinger Points and Pushes])[
-  Each character has a pool of Gunslinger Points. These can be used to _push_ rolls, increasing the die size by one step following the usual progression:
+#rule-box(title: [Sand Points and Pushes])[
+  Each character has a pool of Sand Points. These can be used to _push oneself_, making for the character behave, *for a moment* (a single roll, a single action), as if they were better at the skill. This means, most notably, increasing the die size by one step following the usual progression:
 
   _$ "d4" -> "d6" -> "d8" -> "d10" -> "d12" $_
 
-  Beyond d12, each Gunslinger Point becomes a +1. Starting from a d12 (even if pushed), 4 points can be spent to roll a d20 with no modifiers. Beyond those 4 points, you add a +1 modifier to the d20 for each additional Gunslinger Point spent.
+  Beyond d12, each Sand Point becomes a +1. Starting from a d12 (even if pushed), 4 points can be spent to roll a d20 with no modifiers. Beyond those 4 points, you add a +1 modifier to the d20 for each additional Sand Point spent.
 ]
 
 You can double the effect of a push (with GM consent) by introducing a complication. Instead of a complication, the World can tally a due.
@@ -502,9 +508,9 @@ As with the main touchstone of this system—Gumshoe—characters are presumed t
 
 When you (partially or fully) fail a roll, the GM presents consequences that you can react to in turn. The choice of which ability to use in your reaction depends on the situation. It's common for reaction rolls to be _risk_ rolls (though not required).
 
-#rule-box(title: "Example")[Bob has a d8 in Aim and tries to hit NPC Alice. Alice is a bandit wanted in 20 towns, so she has a legendary DC of 11. Knowing this, Bob spends two Gunslinger Points to push his roll to a d12. Unfortunately, he rolls a 6 and a 10, thus taking a full failure. Alice now gets to shoot back at him. Bob rolls Awareness to try to find cover to mitigate the damage. He acts quickly, having no real alternatives, calling for a _risk roll._ He rolls his d6 against a simple DC of 5 because they're in a saloon full of barrels: it's a 6, so he manages to dive, taking no damage. He emerges unscathed from the situation, but is now cornered by Alice. How will he proceed?
+#rule-box(title: "Example")[Bob has a d8 in Aim and tries to hit NPC Alice. Alice is a bandit wanted in 20 towns, so she has a legendary DC of 11. Knowing this, Bob spends two Sand Points to push his roll to a d12. Unfortunately, he rolls a 6 and a 10, thus taking a full failure. Alice now gets to shoot back at him. Bob rolls Awareness to try to find cover to mitigate the damage. He acts quickly, having no real alternatives, calling for a _risk roll._ He rolls his d6 against a simple DC of 5 because they're in a saloon full of barrels: it's a 6, so he manages to dive, taking no damage. He emerges unscathed from the situation, but is now cornered by Alice. How will he proceed?
 
-Bob could instead choose to react with Grit. He heroically takes the bullet in the shoulder, _risk_ rolling his d10 in Grit against a legendary DC of 11. He uses a Gunslinger Point and manages to succeed by rolling an 11. Eventually he'll have to stop (he does have lead in his shoulder), but for now he doesn't give ground.]
+Bob could instead choose to react with Grit. He heroically takes the bullet in the shoulder, _risk_ rolling his d10 in Grit against a legendary DC of 11. He uses a Sand Point and manages to succeed by rolling an 11. Eventually he'll have to stop (he does have lead in his shoulder), but for now he doesn't give ground.]
 
 It's reasonable for the GM to impose disadvantage on reaction rolls using the same ability that just failed (barring special circumstances).
 
@@ -517,83 +523,75 @@ After the first exchange occurs, the player might be tempted to keep the chain o
 === Damage
 
 There are 5 damage levels:
-- Unharmed
-- Wounded
-- Badly Wounded
-- Dying
-- Dead
+#table(
+  columns: (auto, auto, auto),
+  align: left,
+  [*Condition*], [*Mechanical Effect*], [*Description*],
+  
+  [Unharmed], 
+  [No penalties], 
+  [You're in fighting shape, ready for whatever comes next.],
+  
+  [Wounded], 
+  [All abilities reduced by 1 die size], 
+  [You're hurt but functional. That bullet graze or knife cut is slowing you down, but you can still act.],
+  
+  [Badly Wounded], 
+  [All abilities reduced by 2 die sizes. Some abilities may become unusable (GM discretion).], 
+  [You're in serious trouble. Blood loss, broken bones, or severe trauma make even basic actions difficult.],
+  
+  [Dying], 
+  [All abilities reduced by 3 die sizes. You fall unconscious and cannot act unless spending Sand Points to briefly regain consciousness for one action by _pushing._], 
+  [You're at death's door. Your vision fades, strength leaves you, and staying conscious requires tremendous effort.],
+  
+  [Dead], 
+  [Character dies, but may make one final action with any ability at -4 die size before expiring (eg dump all Sand Points into one final shot).], 
+  [Your time has come. In your last moments, you might manage one desperate act of will before the darkness takes you.],
+)
 
-When taking damage, based on the result of your response, you can move from one level to another.
+When taking damage, based on the result of your response, you can move from one level to another. Strong results, like strong failures in getting out of the way of a bullet, might also move the PC by two levels. (eg unharmed $->$ badly wounded)
+
+Note to GMs: this system gets _very_ lethal _very quickly._ Pay careful attention to telegraph potentially game-ending encounters.
 
 == Abilities
 The six abilities are:
 
-- Aim
-- Ride
-- Survival
-- Grit (ability to "grit your teeth." Determines resistance to pain, for example)
-- Awareness (ability to observe surroundings, actively or passively. Tracking skills)
-- Gift of the Gab
-
-
-=== What can they do? 
-
-When abilities get stronger, so does the kind of thing the character can do become more and more impressive. Here below there's a list to serve as inspiration, to understand the power scaling of characters. GMs can use this list to determine what tasks requite no roll or when to award advantage / disadvantage or how to set DCs. Depending on how much rolling is desidered, one might consider as "guaranteed" either the _current_ level of the ability, or the one below. (ie, At d8, one can either consider all d8 and lower "abilities" to be automatic, or to consider "automatic" all d6 and lower).
-
-At the same time, pushing rolls also increases in value. Beyond simply increasing die size, it can also be played with to achieve feats normally reserved off of higher "tiers", or to push the boundaries of one's competence in a creative manner. EG, a PC with d8 Aim might push their roll to also call their shot.
-
 #table(
-  columns: (auto, auto, 2fr),
-  [*Ability*], [*Level*], [*What can you do?*],
+  columns: (auto, 1fr),
+  align: left,
+  [*Ability*], [*Description*],
   
-  table.cell(rowspan: 5)[*Aim*],
-  [d4], [You couldn't hit the broad side of a barn if you were standing inside it. Best stick to threatening folks from real close.],
-  [d6], [You can hit what you're aiming at, most of the time. Nothing fancy, but you won't embarrass yourself in a scrap.],
-  [d8], [You would do the William Tell on your own spouse, you're fast on the draw.],
-  [d10], [You can call your shots even under pressure, you could cut off the tallest leaf of a tree with a single shot bullet, or hunt birds with a revolver on horseback.], 
-  [d12], [Duelling is no challenge to you. You could end the life of any man you see, should you wish it, and be confident that not one of the lawmen they'd send after you could ever be a match for your skill. Your equals don't run with Uncle Sam.], 
+  [Aim], 
+  [Shooting, throwing, and hitting targets. Combat accuracy and weapon handling.],
   
-  table.cell(rowspan: 5)[*Ride*],
-  [d4],[Horses seem to know you're nervous, and they don't much like it. You can stay in the saddle, but barely.],
-  [d6],[You're comfortable on horseback and can handle most any gentle mount without trouble],
-  [d8], [You can steal any horse from their owner by gaining its love and trust, and ride for hours without getting tired.],
-  [d10], [You can jump any reasonable obstacle, brave any river and tame any wild horse you may find.],
-  [d12], [The absence  of roads won't slow you down, nor will the brush, nor the fact that you lack a familiar animal. Is that an elephant? A mountain goat? A buffalo? Anything can be tamed.],
+  [Ride], 
+  [Horsemanship, animal handling, and mounted activities. Managing beasts of burden.],
   
-  table.cell(rowspan: 5)[*Survival*],
-  [d4],[The wilderness is a cruel mistress who doesn't much care for your company. You're not confident in camping out alone],
-  [d6],[You're confident you can give yourself a fighting chance in a more challenging environment. In good conditions, you might even like staying out.],
-  [d8], [You can easily set up camp, survive alone in the wilderness for an indefinite amount of time, light a fire.],
-  [d10], [Your fires don't emit visible smoke. You can camp without being seen, and you see all who try to do the same.],
-  [d12], [You can get the lay of the land better than anyone could dream of in a lifetime, and you can do so in a matter of hours. You can follow any track, cut away from any trail without getting lost.],
+  [Survival], 
+  [Wilderness skills, following trails and physical signs, camping, and navigating harsh environments.],
   
-  table.cell(rowspan: 5)[*Grit*],
-  [d4],[You wilt under pressure like a flower in the desert sun. Pain, hardship, and harsh words all hit you harder than they should.],
-  [d6],[You can take a punch and keep standing. Life's knocked you around some, but you've learned to roll with it.],
-  [d8], [Starvation, torture, thirst. Words that'd make another cowpoke shiver that make you smile. Bring it on.],
-  [d10], [Pain is just a voice in your head, and it can be tuned out. That bullet lodged within your shoulder isn't going anywhere, but you've sure got places to be.],
-  [d12], [Death keeps knocking on your door, and you keep telling it to come later. You don't know what makes your bones and flows in your veins, but you know it's tough.],
+  [Grit], 
+  [Mental toughness, pain tolerance, and perseverance. "Gritting your teeth" through hardship.],
   
-  table.cell(rowspan: 5)[*Awareness*],
-  [d4],[You couldn't spot trouble if it was wearing a bright red shirt and firing a cannon. Best keep your friends close - you'll need them to watch your back.],
-  [d6],[You notice the important things - who's armed, where the exits are, when someone's obviously lying. Nothing fancy, but enough to keep you breathing.],
-  [d8], [You notice the slightest bulge coming from a concealed weapon, you keep tabs on any cover around you should a gunfight arise.],
-  [d10], [As you observe a person, you can tell by the look on their face how much sleep they got, if they drink. You can find small clues, even when carefully hidden.],
-  [d12], [Nothing eludes your notice. Not a small change in wind that makes you easier to track, not the faint sound of padded hooves preparing an ambush. You're always ready.],
+  [Awareness], 
+  [Observation, perception, and noticing details. Reading people and situations, detecting ambushes.],
   
-  table.cell(rowspan: 5)[*Gift of the Gab*],
-  [d4],[Words fail you when you need them most. You stammer, you stumble, and you generally make folks wish you'd just stay quiet.],
-  [d6],[You can hold a conversation without embarrassing yourself. People listen when you talk, even if they don't always like what they hear.],
-  [d8], [Words, sophistry and a sly silver tongue are in your arsenal. You could sell a pharmacist into paying you to "sample" his products.],
-  [d10], [The gab goes beyond the voice. It's in the tone, the manners, the gestures. You know this second layer of language and its many dialects, which change through social classes and geography.],
-  [d12], [Your reputation precedes you, and it opens many, many doors. Your words carry weight, and even your enemies think themselves wise to listen to you: one such as you -they'd think- probably doesn't deal in empty threats.],
+  [Gift of the Gab], 
+  [Social skills, persuasion, deception, and verbal communication. Talking your way through problems.],
 )
+
+
+When abilities get stronger, so does the kind of thing the character can do become more and more impressive. This is handled via the DCs system. For example, _calling shots_ might raise the DC by 1. Shooting from a large distance might do the same. Combining the two might raise it by 2. This is sort of pre-tracked within the difficulty table above.
+
+A d4 is a novice, or a person with a serious lack of talent, a d6 represents roughly amateurish-average skill. A d8 represents the level of a professional. A d10 is a virtuoso, and the d12 is the all-time-best in the field. When pushing with Sand Points, characters can attempt feats normally associated with higher ability levels.
+
+#example-box()[A d6 Aim character might reliably hit targets at close range, while a d10 character could make precise shots at distance or under pressure. A d12 character operates at legendary levels of precision.]
 
 == Character Creation
 
-*You have 8 Gunslinger Points at your disposal.* They can be kept entirely (meaning you'll have 8 Gunslinger Points available after each rest), or they can be invested in permanent improvements. Points can only be invested during character creation, or through strong narrative justification (since Gunslinger Points become a rechargeable resource once you start playing).
+*You have 8 Sand Points at your disposal.* They can be kept entirely (meaning you'll have 8 Sand Points available after each rest), or they can be invested in permanent improvements. Points can only be invested during character creation, or through strong narrative justification (since Sand Points become a rechargeable resource once you start playing).
 
-#rule-box(title: [Investing Gunslinger Points])[
+#rule-box(title: [Investing Sand Points])[
   The cost to permanently increase an ability is:
 #table(
   columns: (auto, auto, 1fr),
@@ -604,25 +602,25 @@ At the same time, pushing rolls also increases in value. Beyond simply increasin
   [d10 $->$ d12], [3 points], [Peak human ability],
 )
 
-\*You can lower an ability to d4 to gain one Gunslinger Point.
+\*You can lower an ability to d4 to gain one Sand Point.
 ]
 
-#rule-box(title: [Remaining Points])[The remaining points form the character's *Gunslinger Point limit.* There are various ways to recharge Gunslinger Points, but they can never exceed the limit (unless explicitly stated by an effect).]
+#rule-box(title: [Remaining Points])[The remaining points form the character's *Sand Point limit.* There are various ways to recharge Sand Points, but they can never exceed the limit (unless explicitly stated by an effect).]
 
-=== Recovering Gunslinger Points
+=== Recovering Sand Points
 
-Gunslinger Points fully recharge after long rests (e.g., a full night). They can also be partially recovered (1-2 points) by eating, drinking, or smoking. To recharge by eating, you must dedicate time to it. For each point recharged by smoking or drinking, make a simple ability roll. If it fails, that ability is reduced by one die size until the next rest, full meal, or for the next 24 hours (whichever comes first).
+Sand Points fully recharge after long rests (e.g., a full night). They can also be partially recovered (1-2 points) by eating, drinking, or smoking. To recharge by eating, you must dedicate time to it. For each point recharged by smoking or drinking, make a simple ability roll. If it fails, that ability is reduced by one die size until the next rest, full meal, or for the next 24 hours (whichever comes first).
 
 === Archetypes
 
-These are essentially classes that are nothing more than legal combinations of what's written above.
+These are essentially presets that are nothing more than combinations of what's written above.
 
 - *Marksman*: Deadeye, a cigarette and a well-kept weapon
 - *Ranger*: Horses, plains
 - *Smuggler*: "Officer, I swear I don't know how that got in my bag"
 - *Survivor*: After navigating a difficult life, chooses to rely more on experience than on people or fate.
 
-The sheets for these can be found at the end of the document
+The sheets for these can be found at the end of the document.
 
 #empty_sheet
 
