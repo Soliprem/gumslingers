@@ -1,123 +1,4 @@
-#let western-theme(title: "Gumslingers", body) = {
-  // Set document properties
-  set document(title: title, author: "Your Name")
-  
-  // Page setup with margins
-  set page(
-    paper: "us-letter",
-    margin: (x: 1.2in, y: 1in),
-    background: {
-      // Subtle parchment-like background with aging effect
-      place(
-        dx: 0pt, dy: 0pt,
-        rect(
-          width: 100%, height: 100%,
-          fill: gradient.radial(
-            rgb("#f4f1e8"), rgb("#ede6d3"), rgb("#e8dcc0"),
-            center: (30%, 20%), radius: 120%
-          )
-        )
-      )
-      // Add some subtle texture spots
-      place(dx: 20%, dy: 15%, 
-        circle(radius: 40pt, fill: rgb("#e8dcc0").transparentize(80%)))
-      place(dx: 70%, dy: 60%, 
-        circle(radius: 30pt, fill: rgb("#d4c4a0").transparentize(85%)))
-      place(dx: 15%, dy: 75%, 
-        circle(radius: 25pt, fill: rgb("#e8dcc0").transparentize(75%)))
-    }
-  )
-
-  // Font settings
-  set text(
-    font: "Times New Roman", // Fallback to common serif
-    size: 11pt,
-    fill: rgb("#2d1810") // Dark brown text
-  )
-
-  // Heading styles with western feel
-  show heading.where(level: 1): it => [
-    #set text(
-      size: 24pt, 
-      weight: "bold",
-      font: ("Courier New", "Georgia", "Times New Roman"),
-      fill: rgb("#5d2a0a")
-    )
-    #set align(center)
-    #block(
-      width: 100%, 
-      inset: (y: 0.5em),
-      stroke: (bottom: 3pt + rgb("#8b4513")),
-      [#it.body]
-    )
-    #v(0.3em)
-  ]
-
-  show heading.where(level: 2): it => [
-    #set text(
-      size: 16pt, 
-      weight: "bold",
-      font: ("Courier New", "Georgia", "Times New Roman"),
-      fill: rgb("#5d2a0a")
-    )
-    #block(
-      inset: (top: 0.8em, bottom: 0.3em),
-      stroke: (bottom: 1.5pt + rgb("#8b4513")),
-      [#it.body]
-    )
-  ]
-
-  show heading.where(level: 3): it => [
-    #set text(
-      size: 14pt, 
-      weight: "bold",
-      style: "italic",
-      fill: rgb("#8b4513")
-    )
-    #block(inset: (top: 0.6em, bottom: 0.2em))[#it.body]
-  ]
-
-  // Style for emphasized text (rules, important info)
-  show emph: it => [
-    #set text(style: "italic", fill: rgb("#8b4513"))
-    #it
-  ]
-
-  // Strong text styling
-  show strong: it => [
-    #set text(weight: "bold", fill: rgb("#5d2a0a"))
-    #it
-  ]
-
-  // List styling
-  set list(indent: 1em, marker: [•])
-  show list: it => [
-    #set text(fill: rgb("#2d1810"))
-    #it
-  ]
-  
-  body
-}
-
-// Custom box for rules or callouts - defined outside the theme function
-#let rule-box(title: none, body) = {
-  let title-text = if title != none { 
-    heading(level: 3)[#title] 
-  } else { 
-    v(0em) 
-  }
-  
-  block(
-    width: 100%,
-    inset: 12pt,
-    radius: 4pt,
-    fill: rgb("#f0e6d2").transparentize(20%),
-    stroke: 2pt + rgb("#8b4513").transparentize(30%),
-  )[
-    #title-text
-    #body
-  ]
-}
+#import "./western-theme.typ": stylised-theme, main-title, rule-box
 
 #let character-sheet(
   name: "",
@@ -330,9 +211,21 @@
 )
 
 // Usage example - replace this with your actual content
-#show: western-theme.with(title: "Gumslingers")
+#show: stylised-theme.with(
+  title: "Gumslingers",
+  paper: "us-letter",
+  text-font: "Times New Roman",
+  heading-font: ("Courier New", "Georgia", "Times New Roman"),
+  text-size: 11pt,
+  main-title-size: 24pt,
+  h1-size: 16pt,
+  h2-size: 14pt,
+  h3-size: 12pt,
+  emph-style: "italic",
+  strong-weight: "bold",
+)
 
-= Gumslingers
+#main-title(heading-font: ("Courier New", "Georgia", "Times New Roman"))[Gumslingers]
 
 == Sistema
 
@@ -374,7 +267,7 @@ Generalmente le CD sono:
 
 Come nella touchstone principale del sistema—Gumshoe—si presume che i personaggi siano _competenti_. Non sono necessari tiri per attività che qualunque avventore del vecchio West sarebbe stato in grado di fare. Inoltre, con l'alzarsi del livello dell'abilità, si alza anche questo baseline minimo di successo.
 
-==== Fallimenti
+=== Fallimenti
 
 Quando si fallisce un tiro, il GM presenta delle conseguenze a cui si può reagire a propria volta. La scelta nell'abilità con cui reagire dipende dalla situazione.
 

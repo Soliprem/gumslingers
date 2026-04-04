@@ -1,218 +1,4 @@
-#let western-theme(title: "Gumslingers", body) = {
-  // Set document properties
-  set document(title: title, author: "Your Name")
-  
-  // Page setup with margins
-  set page(
-    paper: "a4",
-    margin: (x: 1.2in, y: 1in),
-    background: {
-      // Subtle parchment-like background with aging effect
-      place(
-        dx: 0pt, dy: 0pt,
-        rect(
-          width: 100%, height: 100%,
-          fill: gradient.radial(
-            rgb("#f4f1e8"), rgb("#ede6d3"), rgb("#e8dcc0"),
-            center: (30%, 20%), radius: 120%
-          )
-        )
-      )
-      // Add some subtle texture spots
-      place(dx: 20%, dy: 15%, 
-        circle(radius: 40pt, fill: rgb("#e8dcc0").transparentize(80%)))
-      place(dx: 70%, dy: 60%, 
-        circle(radius: 30pt, fill: rgb("#d4c4a0").transparentize(85%)))
-      place(dx: 15%, dy: 75%, 
-        circle(radius: 25pt, fill: rgb("#e8dcc0").transparentize(75%)))
-    }
-  )
-
-  // Font settings
-  set text(
-    font: ("Courier Prime", "Times New Roman"), // Fallback to common serif
-    size: 12pt,
-    fill: rgb("#2d1810"), // Dark brown text
-  )
-
-  // Heading styles with western feel
-  show heading.where(level: 1): it => [
-    #set text(
-      size: 24pt, 
-      weight: "bold",
-      font: ("Courier Prime", "Georgia", "Times New Roman"),
-      fill: rgb("#5d2a0a")
-    )
-    #set align(center)
-    #block(
-      width: 100%, 
-      inset: (y: 0.5em),
-      stroke: (bottom: 3pt + rgb("#8b4513")),
-      [#it.body]
-    )
-    #v(0.3em)
-  ]
-
-  show heading.where(level: 2): it => [
-    #set text(
-      size: 18pt, 
-      weight: "bold",
-      font: ("Courier Prime", "Georgia", "Times New Roman"),
-      fill: rgb("#5d2a0a")
-    )
-    #block(
-      inset: (top: 0.8em, bottom: 0.3em),
-      stroke: (bottom: 1.5pt + rgb("#8b4513")),
-      [#it.body]
-    )
-  ]
-
-  show heading.where(level: 3): it => [
-    #set text(
-      size: 16pt, 
-      weight: "bold",
-      style: "italic",
-      fill: rgb("#8b4513")
-    )
-    #block(inset: (top: 0.6em, bottom: 0.2em))[#it.body]
-  ]
-
-  show heading.where(level: 4): it => [
-    #set text(
-      size: 14pt, 
-      weight: "bold",
-      style: "italic",
-      fill: rgb("#8b4513")
-    )
-    #block(inset: (top: 0.4em, bottom: 0.15em))[#it.body]
-  ]
-
-  // Style for emphasized text (rules, important info)
-  show emph: it => [
-    #set text(fill: rgb("#8b4513"))
-    #it
-  ]
-
-  // Strong text styling
-  show strong: it => [
-    #set text(fill: rgb("#5d2a0a"))
-    #it
-  ]
-
-  // List styling
-  set list(indent: 1em, marker: [•])
-  show list: it => [
-    #set text(fill: rgb("#2d1810"))
-    #it
-  ]
-
-  set table(
-    stroke: none,
-    fill: (x, y) => {
-      if y == 0 { 
-        rgb("#8b4513").transparentize(70%)
-      } else if calc.odd(y) { 
-        rgb("#f0e6d2").transparentize(60%)
-      } else { 
-        rgb("#ffffff").transparentize(30%) 
-      }
-    },
-    inset: 8pt
-  )
-
-  show table: it => [
-    #block(
-      width: 100%,
-      inset: 0pt,
-      radius: 4pt,
-      stroke: 2pt + rgb("#8b4513").transparentize(30%),
-      clip: true,
-    )[
-      #it
-    ]
-  ]
-
-  show table.cell: it => {
-    if it.y == 0 {
-      // Header cells
-      set text(
-        weight: "bold",
-        fill: rgb("#2d1810"),
-        size: 11pt
-      )
-      it
-    } else {
-      // Regular cells
-      set text(
-        fill: rgb("#2d1810"),
-        size: 10pt
-      )
-      it
-    }
-  }
-
-  
-  body
-}
-
-#let western-toc(title: "Table of Contents") = {
-  
-  // Title styling
-  block(
-    width: 100%,
-    inset: (y: 0.8em),
-    stroke: (bottom: 3pt + rgb("#8b4513"), top: 3pt + rgb("#8b4513")),
-    fill: rgb("#8b4513").transparentize(80%),
-  )[
-    #set text(
-      size: 20pt,
-      weight: "bold", 
-      fill: rgb("#5d2a0a"),
-      font: ("Courier Prime", "Georgia", "Times New Roman")
-    )
-    #align(center)[#title]
-  ]
-  
-  v(0.8em)
-  
-  // TOC container with Western styling
-  block(
-    width: 100%,
-    inset: 20pt,
-    radius: 6pt,
-    fill: rgb("#f0e6d2").transparentize(30%),
-    stroke: 2pt + rgb("#8b4513").transparentize(30%),
-  )[
-    #outline(
-      depth: 3,
-      indent: auto,
-    )
-  ]
-  pagebreak()
-}
-
-#let rule-box(title: none, body) = {
-  let title-text = if title != none { 
-    heading(level: 3)[#title] 
-  } else { 
-    v(0em) 
-  }
-  
-  block(
-    width: 100%,
-    inset: 12pt,
-    radius: 4pt,
-    fill: rgb("#f0e6d2").transparentize(20%),
-    stroke: 2pt + rgb("#8b4513").transparentize(30%),
-  )[
-    #title-text
-    #body
-  ]
-}
-
-#let example-box(body) = {
-  rule-box(title: "Example")[#body]
-}
+#import "./generic-theme.typ": stylised-theme, main-title, stylised-toc, rule-box, example-box
 
 #let character-sheet(
   name: "",
@@ -425,10 +211,21 @@
 )
 
 
-// Usage example - replace this with your actual content
-#show: western-theme.with(title: "Gumslingers")
-= Gumslingers
-#western-toc()
+#show: stylised-theme.with(
+  title: "Gumslingers",
+  paper: "a4",
+  text-font: ("Courier Prime", "Times New Roman"),
+  heading-font: ("Courier Prime", "Georgia", "Times New Roman"),
+  text-size: 12pt,
+  main-title-size: 24pt,
+  h1-size: 18pt,
+  h2-size: 16pt,
+  h3-size: 14pt,
+  h4-size: 12pt,
+  show-table-style: true,
+)
+#main-title(heading-font: ("Courier Prime", "Georgia", "Times New Roman"))[Gumslingers]
+#stylised-toc(heading-font: ("Courier Prime", "Georgia", "Times New Roman"))
 
 
 == Resolution System
@@ -675,4 +472,3 @@ The sheets for these can be found at the end of the document.
   archetype: "Survivor",
   gunslinger-points: 2,
 )
-
