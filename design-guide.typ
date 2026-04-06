@@ -26,6 +26,7 @@ Take for example horse-riding. We can *choose* to make it a very complicated sub
 There's a few systems you probably *need* to add:
 - a damage / hp system (player characters *will* get hurt eventually, even in a game with no combat)
 - a basic skill system
+- an initiative system (doesn't need to be linear, can be reaction based like the one in `western`)
 
 Why not add them by default? I hear you ask?
 
