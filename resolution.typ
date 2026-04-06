@@ -1,7 +1,7 @@
 #import "./generic-theme.typ": *
 
 #show: stylised-theme.with(
-  title: "Gumslingers",
+  title: "Resolution System",
 )
 #main-title()[Resolution System]
 #stylised-toc()

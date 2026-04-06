@@ -1,20 +1,21 @@
-# Orbit
-Gumslingers was a simple Western TTRPG system. Now it's Orbit: a generic, modular system. The current components are:
-- the resolution system (under `resolution`)
-- the magic system (under `magic`)
-- the western system (under `western-system`)
+#import "./generic-theme.typ": *
 
-# Why Orbit
+#show: stylised-theme.with(
+  title: "How to build with Orbit",
+)
+#main-title()[How to tailor Orbit]
+#stylised-toc()
+
+= Why Orbit
 Orbit needs tailoring. That means it takes a little bit of effort. It also means that there's no excess cloth. Unlike other generic systems like GURPS (which I adore, to be clear, no shade), the tailoring aims to still be founded on minimalism. This should result in a fast building experience for the GM, and a simple, but expressive system for the players.
 
-## Flexible
+== Flexible
 The core (or the _star_, if you will) of Orbit is the resolution system. It links with the other systems through the metacurrency, which you are free to name for your setting. Different subsystems use different names for it and you're free to use them or take them as inspiration.
 
-## Hackable
+== Hackable
 It's very easy to design a subsystem, or hack away at one to get something more to your liking, and in fact I'd encourage it!
 
-
-## How to tailor Orbit
+== How to tailor Orbit
 
 First, take the resolution system.
 
@@ -30,6 +31,6 @@ Why not add them by default? I hear you ask?
 
 Well, a damage / hp system can be more or less lethal. It can rely on hp or wounds. A skill system can be granular or paint in broad strokes. I'll provide modules, but it's up to you whether your game needs the one or the other.
 
-### Mechanically, how do I tailor Orbit
+=== Mechanically, how do I tailor Orbit
 
 The system is written in typst. You can pretty much just concatenate the contents of the files (ie: copy paste the texts) and it all should pretty much work, to be honest. I'll work to try to make it as seamless as possible. Contributions are welcome. Or you can just take the pdfs of different submodules and use those separately.
