@@ -2,19 +2,9 @@
 
 #show: stylised-theme.with(
   title: "Gumslingers",
-  paper: "a4",
-  text-font: ("Courier Prime", "Times New Roman"),
-  heading-font: ("Courier Prime", "Georgia", "Times New Roman"),
-  text-size: 12pt,
-  main-title-size: 24pt,
-  h1-size: 18pt,
-  h2-size: 16pt,
-  h3-size: 14pt,
-  h4-size: 12pt,
-  show-table-style: true,
 )
-#main-title(heading-font: ("Courier Prime", "Georgia", "Times New Roman"))[Gumslingers]
-#stylised-toc(heading-font: ("Courier Prime", "Georgia", "Times New Roman"))
+#main-title()[Resolution System]
+#stylised-toc()
 
 = Resolution System
 
